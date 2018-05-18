@@ -1,0 +1,41 @@
+<!-- Product Form -->
+<div class="well well-lg">
+    <form #f="ngForm" (ngSubmit)="onSave()">
+      <div class="form-group">
+        <label for="carName">Name</label>
+        <input type="text" class="form-control" id="carName" name="name" [(ngModel)]="car.name" required #name="ngModel">
+        
+        
+        <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
+          Name is required.
+        </div>
+      </div>
+      
+    
+    <div #parent></div> 
+
+     <div class="form-group">
+        <label for="carPrice">Price</label>
+        <input type="text" class="form-control" id="carPrice" name="price" [(ngModel)]="car.price" required #price="ngModel">
+      
+        <div class="alert alert-danger" *ngIf="price.invalid && price.touched">
+          Price is required.
+        </div>
+
+      </div>
+      <input type="hidden" name="carid" [(ngModel)]="car.id" #carid="ngModel">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="isAvailable" value="true" name="isAvailable" > Available
+        </label>
+      </div>
+     
+      <button name="save" [disabled]="f.invalid" class="btn btn-primary" >
+        Save
+      </button>
+    </form>
+</div>
+<div class="alert alert-success" *ngIf="showMessage">
+    car saved successfully!
+</div>
+  

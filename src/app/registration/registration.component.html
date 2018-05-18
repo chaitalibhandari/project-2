@@ -1,0 +1,183 @@
+<div class="row" >
+        <div class="col-xs-12">
+            <app-outer-nav></app-outer-nav>
+        </div>
+</div>
+
+<div class="row">
+   
+  <div class="col-lg-12">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+          <div class="container">
+
+            <div class="row" style="text-align:center">
+              <h1>REGISTRATION FORM</h1>
+            </div>
+            <div class="alert alert-success" *ngIf="successMessage">
+                registered user successfully!
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="fname" name="fname" formControlName="fname" [(ngModel)]="user.fname">
+                    <div class="help-block" 
+                    *ngIf="fname.touched && fname.invalid">
+                        <div *ngIf="fname.errors.required" class="alert alert-danger">
+                            First Name is required.
+                        </div>
+                        <div *ngIf="fname.errors.minlength" class="alert alert-danger">
+                            First Name should contain atleast {{ fname.errors.minlength.requiredLength }} characters.
+                        </div>
+                        <div *ngIf="fname.errors.cannotContainSpace" class="alert alert-danger">
+                            First name can not contain spaces. 
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="middleName">Middle Name</label>
+                    <input type="text" class="form-control" id="mname" name="mname" formControlName="mname" [(ngModel)]="user.mname">
+                </div>
+                <div class="help-block" 
+                    *ngIf="mname.touched && mname.invalid">
+                    <div *ngIf="mname.errors.minlength" class="alert alert-danger">
+                        Middle Name should contain atleast {{ mname.errors.minlength.requiredLength }} characters.
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lname" formControlName="lname" [(ngModel)]="user.lname">
+                    <div *ngIf="" class="alert alert-danger">
+                        Last Name is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email"  formControlName="email" [(ngModel)]="user.email">
+                    <div class="help-block" 
+                    *ngIf="email.touched && email.invalid">
+                        <div *ngIf="email.errors.required" class="alert alert-danger">
+                            Email is required
+                        </div>
+                        <div *ngIf="email.errors.email" class="alert alert-danger">
+                            Invalid Email
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" formControlName="username" [(ngModel)]="user.username">
+                    <div class="help-block" 
+                    *ngIf="username.touched && username.invalid">
+                        <div *ngIf="username.errors.required" class="alert alert-danger">
+                            Username is required.
+                        </div>
+                        <div *ngIf="username.errors.checkUser" class="alert alert-danger">
+                            This username is not available
+                        </div>
+                    </div>
+                </div>
+
+               <!-- {{ passwords?.errors?.matchPassword }}-->
+                <div formGroupName="passwords">
+                    <div class="form-group col-md-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" formControlName="password">
+                        <div class="help-block" 
+                        *ngIf="password.touched && password.invalid">
+                            <div *ngIf="password.errors.required" class="alert alert-danger">
+                                Password is required.
+                            </div>
+                            
+                        </div>
+                       
+                    </div>
+         
+                    <div class="form-group col-md-3">
+                        <label for="cpassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="cpassword" name="cpassword" formControlName="cpassword">
+                        <div class="help-block" 
+                        *ngIf="cpassword.touched && cpassword.invalid">
+                            <div *ngIf="cpassword.errors.required" class="alert alert-danger">
+                                Re-type password.
+                            </div>
+                       
+                        </div>
+                       
+                    </div>
+                    
+                </div>
+                <div *ngIf="!passwords.valid" class="help-block">
+                    <div *ngIf="passwords?.errors?.matchPassword" class="alert alert-danger">
+                      The two passwords aren't the same
+                    </div>
+                </div>
+                
+            </div>    
+
+            <div class="row">
+                
+                <div class="form-group col-md-6">
+                    <label for="address">Address</label>
+                    <textarea class="form-control" id="address" name="address" rows="10" cols="50" formControlName="address">
+                    </textarea>
+                </div>
+                <div class="form-group col-md-6">
+                <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="phone">Phone</label>
+                            <input type="number" class="form-control" id="phone" name="phone"  formControlName="phone">
+                        </div>   
+                      <div class="form-group col-md-12">
+                          <label for="pincode">Pin Code</label>
+                          <input type="number" class="form-control" id="pincode" name="pincode" formControlName="pincode">
+                      </div>
+                      <div class="form-group col-md-12">
+                          <label for="date_of_birth">Date Of Birth</label>
+                          <input type="text" class="form-control" name="date_of_birth" bsDatepicker formControlName="date_of_birth">
+                      </div>
+                </div>
+
+                </div>
+            </div>
+
+            
+            
+            <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="image">Your Profile photo</label>
+                  <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+                  <input type="hidden" id="imageH" name="imageH" formControlName="imageH">
+                  <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="diplay">Your Profile photo</label>
+                    <h6>your photo will be displayed here</h6>
+
+                    <img [src]="url" width="200px" height="200px" *ngIf="url">
+                </div>
+                
+               
+                <div *ngIf="ifNotImage" class="alert alert-danger">
+                   Invalid Image format
+                </div>
+                  
+            </div>
+
+            
+
+            <div [innerHTML]="myHtml"></div>
+            <div class="form-group">
+                  <button name="save" type="submit" class="btn btn-primary" [disabled]="form.invalid || ifNotImage">
+                      REGISTER
+                  </button>
+            </div>
+          </div>
+      </form>
+  </div>
+</div>

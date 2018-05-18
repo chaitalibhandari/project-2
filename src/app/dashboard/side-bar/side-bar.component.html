@@ -1,0 +1,33 @@
+
+<div class="list-group">
+  
+  <a routerLinkActive="active" routerLink="/dashboard/profile" class="list-group-item">
+      Profile
+  </a>
+  
+  <a routerLinkActive="active" class="list-group-item" dropdown>
+        <span dropdownToggle  class="dropdown-toggle">
+          Cars <span class="caret"></span>
+        </span>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem"><a routerLinkActive="active" routerLink="/dashboard/cars/new" class="dropdown-item">Add New Car</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a routerLinkActive="active" routerLink="/dashboard/cars/carlist" class="dropdown-item">View Cars</a></li>
+        </ul>
+  </a>
+  <a routerLinkActive="active" routerLink="/dashboard/customer" class="list-group-item">
+    Customer
+  </a>
+  <a routerLinkActive="active" routerLink="/dashboard/users" class="list-group-item">
+    Users
+  </a>
+  <a routerLinkActive="active" routerLink="/dashboard/car-details" class="list-group-item">
+    Details
+  </a>
+
+</div>
+
+
+
+
+

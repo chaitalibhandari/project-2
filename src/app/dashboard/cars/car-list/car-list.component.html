@@ -1,0 +1,35 @@
+<input type="text" placeholder="Search for..." class="form-control" name="searchText" [(ngModel)]="searchText" />
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Model</th>
+      <th scope="col">Price</th>
+      <th scope="col">Available</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let car of cars | searchCars : searchText : 'name'">
+        <td>{{ car.name | uppercase }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.price | currency : 'INR' }}</td>
+        <td><span class="label" [ngClass]="{'label-primary': car.isAvailable, 'label-danger': !car.isAvailable}">
+            {{ car.isAvailable ? 'Available' : 'Not Available' }}
+          </span>
+        </td>
+        <td>
+
+          <a class="btn btn-info" [routerLink]="['../view', car.id]" [queryParams]="{ price: 10 }"><span class="glyphicon glyphicon-info-sign"></span></a>
+          <a class="btn btn-primary"[routerLink]="['../edit', car.id]" [queryParams]="{ price: 10 }"><span class="glyphicon glyphicon-edit"></span></a>
+          <a class="btn btn-warning"><span class="glyphicon glyphicon-trash"></span></a>
+          
+        </td>
+    </tr>
+  </tbody>
+</table>
+
+<!--
+
+
+-->

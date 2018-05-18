@@ -1,0 +1,16 @@
+<div [formGroup]="imageForm">
+    
+    <div class="panel panel-default">
+            <div class="panel-heading">image</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="file" class="form-control" name="image" id="image" formControlName="image" (change)="imageLoad($event)">
+                    </div>  
+                    <div class="col-md-6">
+                        <img [src]="url" class="img-thumbnail" *ngIf="url">
+                    </div>  
+                </div>   
+            </div>
+    </div>
+</div>
